@@ -7,6 +7,15 @@ export default function Lines() {
   const [schedulesByLine, setSchedulesByLine] = useState({});
   const [winnersByLine, setWinnersByLine] = useState({});
   const [garagesMap, setGaragesMap] = useState({});
+  const frameTagClass = (f) => {
+    const k = String(f || "");
+    if (k === "morning") return "frame-tag frame--morning";
+    if (k === "midday") return "frame-tag frame--midday";
+    if (k === "afternoon") return "frame-tag frame--afternoon";
+    if (k === "evening") return "frame-tag frame--evening";
+    if (k === "night") return "frame-tag frame--night";
+    return "frame-tag";
+  };
   const hhmmToMin = (s) => {
     if (!s) return null;
     const [h, m] = s.split(":").map(Number);
@@ -99,19 +108,19 @@ export default function Lines() {
 
               <div className="chips mt-2">
                 <span className="chip chip--meta">
-                  🏭 Provider: {garagesMap[line.provider_garage_id] ?? `#${line.provider_garage_id}`}
+                  🏭 - {garagesMap[line.provider_garage_id] ?? `#${line.provider_garage_id}`}
                 </span>
-                <span className="chip chip--meta">⏱️ Line time: {line.travel_time_line} min</span>
+                <span className="chip chip--meta">⏱️ Line time - {line.travel_time_line} min</span>
               </div>
 
               <div className="mt-3 text-sm text-gray-800">
                 {winnerNow && (
                   <div className="flex flex-col gap-1">
                     <div className="chips">
-                      <span className="chip chip--meta">👤 {winnerNow.username}</span>
-                      <span className="chip chip--meta">🔁 Every {winnerNow.frequency} min</span>
-                      <span className="chip chip--meta">🪙 Bid {winnerNow.bid_price}</span>
-                      <span className="chip chip--meta">⏰ {winnerNow.start_time} - {winnerNow.end_time}</span>
+                      <span className="chip chip--meta">👤 - {winnerNow.username}</span>
+                      <span className="chip chip--meta">🔁 - Every {winnerNow.frequency} min</span>
+                      <span className="chip chip--meta">🪙 Bid - {winnerNow.bid_price}</span>
+                      <span className={frameTagClass(winnerNow.frame)}>{winnerNow.frame || "-"}</span>
                     </div>
                   </div>
                 )}
@@ -132,7 +141,7 @@ export default function Lines() {
                         <div className="chips mt-1">
                           <span className="chip chip--meta">🔁 {sch.frequency} min</span>
                           <span className="chip chip--meta">🪙 {sch.bid_price}</span>
-                          <span className="chip chip--meta">⏰ {sch.start_time} - {sch.end_time}</span>
+                          <span className={frameTagClass(sch.frame)}>{sch.frame || "-"}</span>
                         </div>
                       </div>
                     ))}
