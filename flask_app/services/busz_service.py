@@ -27,7 +27,7 @@ def get_buses_for_user(username, is_admin):
         })
     return buses
 
-# Új busz létrehozása (pl.: piacon új busz vásárlásakor)
+# Új busz létrehozása
 def create_bus(data):
     validate_fields(data, {
         "plate": str,

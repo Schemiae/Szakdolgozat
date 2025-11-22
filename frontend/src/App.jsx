@@ -13,6 +13,7 @@ import "./App.css";
 function EditDescription({ bus, onUpdated }) {
   const [editing, setEditing] = useState(false);
   const [desc, setDesc] = useState(bus.description || "");
+  const [originalDesc, setOriginalDesc] = useState(bus.description || ""); 
   const [saving, setSaving] = useState(false);
   const [alertDlg, setAlertDlg] = useState({ open: false, title: "", message: "" });
 
@@ -25,6 +26,7 @@ function EditDescription({ bus, onUpdated }) {
         { withCredentials: true }
       )
       .then(() => {
+        setOriginalDesc(desc);
         setEditing(false);
         setSaving(false);
         onUpdated(desc);
@@ -38,10 +40,14 @@ function EditDescription({ bus, onUpdated }) {
   if (!editing) {
     return (
       <>
-        <span className="ml-2">{desc}</span>
+        <span className="ml-2">{bus.description || ""}</span>
         <button
           className="btn-industrial btn-industrial--secondary ml-2 px-2 py-1 bg-blue-500 text-black rounded hover:bg-blue-600"
-          onClick={() => setEditing(true)}
+          onClick={() => {
+            setOriginalDesc(bus.description || "");
+            setDesc(bus.description || "");
+            setEditing(true);
+          }}
         >
           Edit
         </button>
@@ -80,7 +86,10 @@ function EditDescription({ bus, onUpdated }) {
         </button>
         <button
           className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400"
-          onClick={() => setEditing(false)}
+          onClick={() => {
+            setDesc(originalDesc);
+            setEditing(false);
+          }}
           disabled={saving}
         >
           Cancel
