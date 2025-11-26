@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from flask_app.services import garage_service
+from services import garage_service
 from db_fakes import FakeConnection
 
 class TestGarageService(unittest.TestCase):

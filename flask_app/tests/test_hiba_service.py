@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from flask_app.services import hiba_service
+from services import hiba_service
 from db_fakes import FakeConnection
 
 class TestHibaService(unittest.TestCase):

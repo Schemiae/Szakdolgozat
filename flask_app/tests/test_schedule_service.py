@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from datetime import datetime
-from flask_app.services import schedule_service
+from services import schedule_service
 from db_fakes import FakeConnection
 
 class TestScheduleService(unittest.TestCase):
