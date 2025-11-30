@@ -289,7 +289,7 @@ export default function Schedules() {
               <option value="evening">evening (16:00-20:00)</option>
               <option value="night">night (20:00-24:00)</option>
             </select>
-            <input name="frequency" type="number" min="1" value={form.frequency} onChange={handleFormChange} required className="border p-2 rounded" placeholder="Frequency (minutes)" />
+            <input name="frequency" type="number" min="1" max="240" value={form.frequency} onChange={handleFormChange} required className="border p-2 rounded" placeholder="Frequency (minutes)" />
             <button 
               type="submit" 
               disabled={!userHasProviderGarage}
