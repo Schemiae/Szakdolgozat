@@ -71,7 +71,7 @@ def deduct_balance():
         return jsonify({"error": "Unauthorized"}), 401
     data = request.get_json()
     amount = data.get("amount")
-    if not isinstance(amount, int) or amount <= 0:
+    if not isinstance(amount, int):
         return jsonify({"error": "Invalid amount"}), 400
     conn = get_connection()
     with conn.cursor() as cur:
